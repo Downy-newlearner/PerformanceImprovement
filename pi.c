@@ -154,7 +154,7 @@ void split10(vec_ptr v){
 
     result = x0 * x1 * x2 * x3 * x4 * x5 * x6 * x7 * x8 * x9;    
 }
-
+//git start
 int main(int argc, int* argv){
     //사용할 구조체 생성
     int len = argv[1];
