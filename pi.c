@@ -9,17 +9,10 @@ typedef int data_t;
 
 #define IDENT 0
 
-typedef struct{
-    int len;
-    data_t *data;
-} vec_rec, *vec_ptr;
-
-void split2(vec_ptr v){
+void split2(int len, int *data){
     data_t result;
 
     int i;
-    int len = v->len;
-    data_t *data = v->data;
     data_t x0 = IDENT;
     data_t x1 = IDENT;
 
@@ -31,15 +24,12 @@ void split2(vec_ptr v){
         x0 = x0 * data[i];
     }
 
-    result = x0 * x1;    
 }
 
-void split4(vec_ptr v){
+void split4(int len, int *data){
     data_t result;
 
     int i;
-    int len = v->len;
-    data_t *data = v->data;
     data_t x0 = IDENT;
     data_t x1 = IDENT;
     data_t x2 = IDENT;
@@ -55,15 +45,12 @@ void split4(vec_ptr v){
         x0 = x0 * data[i];
     }
 
-    result = x0 * x1 * x2 * x3;    
 }
 
-void split6(vec_ptr v){
+void split6(int len, int *data){
     data_t result;
 
     int i;
-    int len = v->len;
-    data_t *data = v->data;
     data_t x0 = IDENT;
     data_t x1 = IDENT;
     data_t x2 = IDENT;
@@ -83,15 +70,12 @@ void split6(vec_ptr v){
         x0 = x0 * data[i];
     }
 
-    result = x0 * x1 * x2 * x3 * x4 * x5;    
 }
 
-void split8(vec_ptr v){
+void split8(int len, int *data){
     data_t result;
 
     int i;
-    int len = v->len;
-    data_t *data = v->data;
     data_t x0 = IDENT;
     data_t x1 = IDENT;
     data_t x2 = IDENT;
@@ -115,16 +99,12 @@ void split8(vec_ptr v){
         x0 = x0 * data[i];
     }
 
-    result = x0 * x1 * x2 * x3 * x4 * x5 * x6 * x7;    
-    
 }
 
-void split10(vec_ptr v){
+void split10(int len, int *data){
     data_t result;
 
     int i;
-    int len = v->len;
-    data_t *data = v->data;
     data_t x0 = IDENT;
     data_t x1 = IDENT;
     data_t x2 = IDENT;
@@ -151,20 +131,12 @@ void split10(vec_ptr v){
     for(;i<len;i++){
         x0 = x0 * data[i];
     }
-
-    result = x0 * x1 * x2 * x3 * x4 * x5 * x6 * x7 * x8 * x9;    
 }
 //git start
 int main(int argc, int* argv){
     //사용할 구조체 생성
-    int len = argv[1];
-    if(len<=0)
-        return 0;
-    vec_ptr st = (vec_ptr) malloc(sizeof(vec_rec));
-    st->len = len;
-    data_t *data = (data_t *) calloc(len, sizeof(data_t));
-    st->data = data;
-        
+    int len = atoi(argv[1]);
+    int *data = (int *) calloc(len, sizeof(int));
     if(argc==2){
         
     
@@ -172,7 +144,7 @@ int main(int argc, int* argv){
         struct timeval stime, etime, gap;
 
         gettimeofday(&stime, NULL);
-        split2(st);
+        split2(len, data);
         gettimeofday(&etime, NULL);
 
         gap.tv_sec = etime.tv_sec - stime.tv_sec;
@@ -186,7 +158,7 @@ int main(int argc, int* argv){
 
         // struct timeval stime, etime, gap;
         gettimeofday(&stime, NULL);
-        split4(st);
+        split4(len, data);
         gettimeofday(&etime, NULL);
 
         gap.tv_sec = etime.tv_sec - stime.tv_sec;
@@ -200,7 +172,7 @@ int main(int argc, int* argv){
 
         // struct timeval stime, etime, gap;
         gettimeofday(&stime, NULL);
-        split6(st);
+        split6(len, data);
         gettimeofday(&etime, NULL);
 
         gap.tv_sec = etime.tv_sec - stime.tv_sec;
@@ -214,7 +186,7 @@ int main(int argc, int* argv){
 
         // struct timeval stime, etime, gap;
         gettimeofday(&stime, NULL);
-        split8(st);
+        split8(len, data);
         gettimeofday(&etime, NULL);
 
         gap.tv_sec = etime.tv_sec - stime.tv_sec;
@@ -228,7 +200,7 @@ int main(int argc, int* argv){
 
         // struct timeval stime, etime, gap;
         gettimeofday(&stime, NULL);
-        split10(st);
+        split10(len, data);
         gettimeofday(&etime, NULL);
 
         gap.tv_sec = etime.tv_sec - stime.tv_sec;
